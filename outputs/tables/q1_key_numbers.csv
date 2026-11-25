@@ -1,0 +1,17 @@
+,value
+products,77.0
+products_with_sales_in_6mo,76.0
+median_cover_days_6mo,19.656629786248047
+products_under_30_days_cover,45.0
+products_over_365_days_cover,2.0
+reorder_level_zero_products,24.0
+reorder_level_zero_share_of_revenue,0.41746727709955644
+reorder_level_spearman_rho_6mo,-0.01061375848911267
+revenue_share_under_30_days_cover,0.8025464256779147
+products_for_50pct_revenue,11.0
+products_for_80pct_revenue,34.0
+suppliers_for_50pct_revenue,6.0
+suppliers_for_80pct_revenue,14.0
+discontinued_products,8.0
+discontinued_share_of_revenue_6mo,0.13714383649769618
+stock_below_reorder_level_no_order,1.0
