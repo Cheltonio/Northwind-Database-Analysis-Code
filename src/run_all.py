@@ -6,7 +6,7 @@ from pathlib import Path
 
 SRC = Path(__file__).resolve().parent
 ROOT = SRC.parent
-STEPS = ["extract_data.py", "q1_inventory.py", "q2_markets.py", "q3_discounts.py"]
+STEPS = ["extract_data.py", "q1_inventory.py", "q2_growth.py", "q3_discounts.py"]
 
 
 def main():

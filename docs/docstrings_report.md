@@ -1,13 +1,16 @@
-# Docstrings written (python-docstrings skill)
+# Docstrings report
+
+Generated from the current code in `src/` after running the `python-docstrings` skill. Style: Google, lines at most 72 characters.
+
 
 ## src/common.py
 
-#### module — [src/common.py:1](src/common.py:1)
+#### `module` — [src/common.py:1](src/common.py:1)
 ```python
 """Shared constants, plot style and table helpers."""
 ```
 
-#### `apply_style` — [src/common.py:26](src/common.py:26)
+#### `apply_style` — [src/common.py:27](src/common.py:27)
 ```python
 """Set matplotlib rcParams to the project chart style.
 
@@ -19,7 +22,7 @@ Returns:
 """
 ```
 
-#### `ensure_dirs` — [src/common.py:50](src/common.py:50)
+#### `ensure_dirs` — [src/common.py:51](src/common.py:51)
 ```python
 """Create the output table and figure folders if missing.
 
@@ -31,7 +34,7 @@ Returns:
 """
 ```
 
-#### `save_table` — [src/common.py:63](src/common.py:63)
+#### `save_table` — [src/common.py:64](src/common.py:64)
 ```python
 """Write a DataFrame to ``TABLE_DIR`` as a CSV file.
 
@@ -45,7 +48,7 @@ Returns:
 """
 ```
 
-#### `save_fig` — [src/common.py:78](src/common.py:78)
+#### `save_fig` — [src/common.py:79](src/common.py:79)
 ```python
 """Save a figure as a PNG in ``FIG_DIR`` and close it.
 
@@ -58,7 +61,7 @@ Returns:
 """
 ```
 
-#### `build_lines` — [src/common.py:93](src/common.py:93)
+#### `build_lines` — [src/common.py:94](src/common.py:94)
 ```python
 """Build one row per order line, joined to order details.
 
@@ -76,14 +79,15 @@ Returns:
 """
 ```
 
+
 ## src/extract_data.py
 
-#### module — [src/extract_data.py:1](src/extract_data.py:1)
+#### `module` — [src/extract_data.py:1](src/extract_data.py:1)
 ```python
 """Extract the Northwind tables from the source PDF into CSV files."""
 ```
 
-#### `table_name_from_header` — [src/extract_data.py:31](src/extract_data.py:31)
+#### `table_name_from_header` — [src/extract_data.py:32](src/extract_data.py:32)
 ```python
 """Identify which Northwind table a header row belongs to.
 
@@ -95,7 +99,7 @@ Returns:
 """
 ```
 
-#### `clean_cell` — [src/extract_data.py:54](src/extract_data.py:54)
+#### `clean_cell` — [src/extract_data.py:55](src/extract_data.py:55)
 ```python
 """Collapse whitespace in a table cell.
 
@@ -107,7 +111,7 @@ Returns:
 """
 ```
 
-#### `extract_pdf_tables` — [src/extract_data.py:69](src/extract_data.py:69)
+#### `extract_pdf_tables` — [src/extract_data.py:70](src/extract_data.py:70)
 ```python
 """Collect the rows of each table found in the PDF.
 
@@ -123,7 +127,7 @@ Returns:
 """
 ```
 
-#### `parse_employees` — [src/extract_data.py:100](src/extract_data.py:100)
+#### `parse_employees` — [src/extract_data.py:101](src/extract_data.py:101)
 ```python
 """Parse the employees table from the PDF page text.
 
@@ -136,7 +140,7 @@ Returns:
 """
 ```
 
-#### `main` — [src/extract_data.py:142](src/extract_data.py:142)
+#### `main` — [src/extract_data.py:143](src/extract_data.py:143)
 ```python
 """Extract all tables from the PDF and write them as CSV files.
 
@@ -148,14 +152,15 @@ Returns:
 """
 ```
 
+
 ## src/load_data.py
 
-#### module — [src/load_data.py:1](src/load_data.py:1)
+#### `module` — [src/load_data.py:1](src/load_data.py:1)
 ```python
 """Load the extracted Northwind CSV files and convert column types."""
 ```
 
-#### `to_number` — [src/load_data.py:17](src/load_data.py:17)
+#### `to_number` — [src/load_data.py:18](src/load_data.py:18)
 ```python
 """Convert text to numbers, removing thousands separators.
 
@@ -167,7 +172,7 @@ Returns:
 """
 ```
 
-#### `load_tables` — [src/load_data.py:29](src/load_data.py:29)
+#### `load_tables` — [src/load_data.py:30](src/load_data.py:30)
 ```python
 """Read every extracted CSV and type the columns used downstream.
 
@@ -181,14 +186,15 @@ Returns:
 """
 ```
 
+
 ## src/q1_inventory.py
 
-#### module — [src/q1_inventory.py:1](src/q1_inventory.py:1)
+#### `module` — [src/q1_inventory.py:1](src/q1_inventory.py:1)
 ```python
 """Question 1: how well reorder levels and stock match recent demand."""
 ```
 
-#### `monthly_units` — [src/q1_inventory.py:22](src/q1_inventory.py:22)
+#### `monthly_units` — [src/q1_inventory.py:23](src/q1_inventory.py:23)
 ```python
 """Total units per product and month, to the last full month.
 
@@ -202,7 +208,7 @@ Returns:
 """
 ```
 
-#### `build_product_table` — [src/q1_inventory.py:40](src/q1_inventory.py:40)
+#### `build_product_table` — [src/q1_inventory.py:41](src/q1_inventory.py:41)
 ```python
 """Build the per-product demand, cover and revenue table.
 
@@ -216,7 +222,7 @@ Returns:
 """
 ```
 
-#### `reorder_correlations` — [src/q1_inventory.py:71](src/q1_inventory.py:71)
+#### `reorder_correlations` — [src/q1_inventory.py:72](src/q1_inventory.py:72)
 ```python
 """Compute Spearman correlations of demand with stock fields.
 
@@ -229,7 +235,7 @@ Returns:
 """
 ```
 
-#### `flag_stability` — [src/q1_inventory.py:90](src/q1_inventory.py:90)
+#### `flag_stability` — [src/q1_inventory.py:91](src/q1_inventory.py:91)
 ```python
 """Count active products under 30 days of cover in each window.
 
@@ -242,7 +248,7 @@ Returns:
 """
 ```
 
-#### `supplier_rollup` — [src/q1_inventory.py:112](src/q1_inventory.py:112)
+#### `supplier_rollup` — [src/q1_inventory.py:113](src/q1_inventory.py:113)
 ```python
 """Summarize recent revenue and low-cover exposure by supplier.
 
@@ -255,7 +261,7 @@ Returns:
 """
 ```
 
-#### `plot_cover` — [src/q1_inventory.py:134](src/q1_inventory.py:134)
+#### `plot_cover` — [src/q1_inventory.py:135](src/q1_inventory.py:135)
 ```python
 """Plot days of cover for the 15 highest-revenue products.
 
@@ -267,7 +273,7 @@ Returns:
 """
 ```
 
-#### `plot_reorder` — [src/q1_inventory.py:172](src/q1_inventory.py:172)
+#### `plot_reorder` — [src/q1_inventory.py:175](src/q1_inventory.py:175)
 ```python
 """Plot reorder level against recent monthly demand.
 
@@ -280,7 +286,7 @@ Returns:
 """
 ```
 
-#### `main` — [src/q1_inventory.py:212](src/q1_inventory.py:212)
+#### `main` — [src/q1_inventory.py:215](src/q1_inventory.py:215)
 ```python
 """Run the Question 1 analysis, then save tables and figures.
 
@@ -292,14 +298,15 @@ Returns:
 """
 ```
 
-## src/q2_markets.py
 
-#### module — [src/q2_markets.py:1](src/q2_markets.py:1)
+## src/q2_growth.py
+
+#### `module` — [src/q2_growth.py:1](src/q2_growth.py:1)
 ```python
-"""Question 2: sources of revenue growth by market."""
+"""Question 2: where revenue growth came from."""
 ```
 
-#### `in_window` — [src/q2_markets.py:19](src/q2_markets.py:19)
+#### `in_window` — [src/q2_growth.py:17](src/q2_growth.py:17)
 ```python
 """Select order lines whose order date falls inside a window.
 
@@ -313,40 +320,7 @@ Returns:
 """
 ```
 
-#### `window_stats` — [src/q2_markets.py:33](src/q2_markets.py:33)
-```python
-"""Compute revenue, orders and customers for each group.
-
-Args:
-    lines (pandas.DataFrame): Order lines with ``CPRev``.
-    group_col (str): Column to group by, such as ``Country``.
-
-Returns:
-    pandas.DataFrame: Per group: revenue, orders, customers,
-    orders per customer and revenue per order.
-"""
-```
-
-#### `decompose` — [src/q2_markets.py:54](src/q2_markets.py:54)
-```python
-"""Split each group's revenue change between windows by driver.
-
-Revenue = customers x orders per customer x revenue per order, so
-the log change splits exactly into three parts. Weighting each part
-by the logarithmic mean of the two revenues gives dollars that sum
-to the total change.
-
-Args:
-    lines (pandas.DataFrame): Order lines with ``CPRev``.
-    group_col (str): Column to group by, such as ``Country``.
-
-Returns:
-    pandas.DataFrame: Window A and B statistics, dollar change by
-    driver, growth, shares, and ``gap_vs_company_growth``.
-"""
-```
-
-#### `quarterly` — [src/q2_markets.py:89](src/q2_markets.py:89)
+#### `quarterly` — [src/q2_growth.py:31](src/q2_growth.py:31)
 ```python
 """Count orders and customers by quarter, Jul 1996 to Mar 1998.
 
@@ -359,7 +333,7 @@ Returns:
 """
 ```
 
-#### `cohort_check` — [src/q2_markets.py:111](src/q2_markets.py:111)
+#### `cohort_check` — [src/q2_growth.py:53](src/q2_growth.py:53)
 ```python
 """Compare early customers with later joiners across windows.
 
@@ -375,7 +349,7 @@ Returns:
 """
 ```
 
-#### `customer_concentration` — [src/q2_markets.py:151](src/q2_markets.py:151)
+#### `customer_concentration` — [src/q2_growth.py:93](src/q2_growth.py:93)
 ```python
 """Rank customers by revenue with each customer's share.
 
@@ -390,47 +364,7 @@ Returns:
 """
 ```
 
-#### `shipcountry_sensitivity` — [src/q2_markets.py:170](src/q2_markets.py:170)
-```python
-"""Compare customer-country and ship-country market attribution.
-
-Args:
-    lines (pandas.DataFrame): Order lines with ``Country`` and
-        ``ShipCountry``.
-
-Returns:
-    pandas.DataFrame: Per country: revenue under each attribution
-    for both windows, absolute differences and growth gaps.
-"""
-```
-
-#### `plot_drivers` — [src/q2_markets.py:197](src/q2_markets.py:197)
-```python
-"""Plot revenue change by market, split by growth driver.
-
-Args:
-    grouped (pandas.DataFrame): Output of ``decompose`` by market
-        group.
-
-Returns:
-    None. Saves ``q2_growth_drivers_by_market.png``.
-"""
-```
-
-#### `plot_gap` — [src/q2_markets.py:239](src/q2_markets.py:239)
-```python
-"""Plot each country's revenue gap versus company growth.
-
-Args:
-    full (pandas.DataFrame): Output of ``decompose`` by country.
-    cust_counts (pandas.Series): Customers on file per country.
-
-Returns:
-    None. Saves ``q2_gap_vs_company_growth.png``.
-"""
-```
-
-#### `plot_quarterly` — [src/q2_markets.py:270](src/q2_markets.py:270)
+#### `plot_quarterly` — [src/q2_growth.py:112](src/q2_growth.py:112)
 ```python
 """Plot quarterly orders against customers who have ordered.
 
@@ -442,7 +376,35 @@ Returns:
 """
 ```
 
-#### `main` — [src/q2_markets.py:294](src/q2_markets.py:294)
+#### `driver_summary` — [src/q2_growth.py:136](src/q2_growth.py:136)
+```python
+"""Compare the two windows on revenue and its three building blocks.
+
+Revenue = customers x orders per customer x revenue per order, so
+the three percent changes multiply to the revenue change.
+
+Args:
+    lines (pandas.DataFrame): Order lines with ``CPRev``.
+
+Returns:
+    pandas.DataFrame: One row per measure with its value in each
+    window and the percent change between them.
+"""
+```
+
+#### `plot_drivers` — [src/q2_growth.py:162](src/q2_growth.py:162)
+```python
+"""Plot the percent change in revenue and its three building blocks.
+
+Args:
+    summary (pandas.DataFrame): Output of ``driver_summary``.
+
+Returns:
+    None. Saves ``q2_growth_drivers.png``.
+"""
+```
+
+#### `main` — [src/q2_growth.py:192](src/q2_growth.py:192)
 ```python
 """Run the Question 2 analysis, then save tables and figures.
 
@@ -454,213 +416,151 @@ Returns:
 """
 ```
 
+
 ## src/q3_discounts.py
 
-#### module — [src/q3_discounts.py:1](src/q3_discounts.py:1)
+#### `module` — [src/q3_discounts.py:1](src/q3_discounts.py:1)
 ```python
-"""Question 3: do discounts lift sales enough to pay for themselves?"""
+"""Question 3: do discounts bring in enough extra sales to pay off?"""
 ```
 
-#### `tier_data` — [src/q3_discounts.py:25](src/q3_discounts.py:25)
+#### `lift_overall` — [src/q3_discounts.py:17](src/q3_discounts.py:17)
 ```python
-"""Prepare order lines for the discount-tier models.
-
-Drops the order with off-tier discounts and adds ``post`` (1 on
-or after the price increase) and ``log_qty``.
+"""Compare average units on discounted and full-price lines.
 
 Args:
-    lines (pandas.DataFrame): Order lines from ``build_lines``.
+    d (pandas.DataFrame): Order lines with ``Quantity`` and the
+        boolean column ``discounted``.
 
 Returns:
-    pandas.DataFrame: Lines on the standard discount tiers.
+    float: Extra units on discounted lines, as a fraction
+    (0.26 = 26% more).
 """
 ```
 
-#### `design_matrix` — [src/q3_discounts.py:44](src/q3_discounts.py:44)
+#### `lift_within` — [src/q3_discounts.py:32](src/q3_discounts.py:32)
 ```python
-"""Build the regression design matrix for a specification.
+"""Compare discounted and full-price lines within each group.
 
-Columns: constant, five discount-tier dummies, product dummies,
-then the controls the specification adds.
+Groups (for example one product) need at least ``MIN_LINES`` lines
+of each kind. Each group's ratio is weighted by its number of
+discounted lines.
 
 Args:
-    d (pandas.DataFrame): Output of ``tier_data``.
-    spec (str): ``product_fe``, ``customer_fe`` or ``month_fe``.
+    d (pandas.DataFrame): Order lines with ``Quantity`` and
+        ``discounted``.
+    key (str): Column defining the groups, e.g. ``ProductID``.
 
 Returns:
-    numpy.ndarray: Matrix with one row per line.
+    tuple[float, int]: Average extra units as a fraction, and the
+    number of groups compared.
 """
 ```
 
-#### `fit_tiers` — [src/q3_discounts.py:71](src/q3_discounts.py:71)
+#### `revenue_effect` — [src/q3_discounts.py:57](src/q3_discounts.py:57)
 ```python
-"""Fit least squares and return the discount-tier coefficients.
+"""Estimate the net revenue effect of discounts for an assumed lift.
+
+Without discounts, a discounted line would have sold
+``1 / (1 + lift)`` of its units at full price. The effect is
+actual revenue minus that.
 
 Args:
-    x (numpy.ndarray): Design matrix from ``design_matrix``.
-    y (numpy.ndarray): Log quantity for each row.
+    d (pandas.DataFrame): Order lines with ``UnitPrice``,
+        ``Quantity``, ``Discount`` and ``discounted``.
+    lift (float): Assumed extra units caused by discounts
+        (0.1 = 10%).
 
 Returns:
-    numpy.ndarray: Five coefficients (5% to 25% tiers) in log units.
+    float: Net revenue effect in dollars (negative = revenue lost).
 """
 ```
 
-#### `revenue_components` — [src/q3_discounts.py:85](src/q3_discounts.py:85)
+#### `break_even_lift` — [src/q3_discounts.py:78](src/q3_discounts.py:78)
 ```python
-"""Split discount revenue into given up and gained amounts.
-
-Counterfactual units without the discount are observed units
-divided by (1 + lift), which assumes the whole estimated lift is
-caused by the discount.
+"""Return the extra sales a discount needs to cover its cost.
 
 Args:
-    price (numpy.ndarray): List unit price per line.
-    qty (numpy.ndarray): Units sold per line.
-    disc (numpy.ndarray): Discount rate per line.
-    lifts (numpy.ndarray): Fractional unit lift for each tier.
+    depth (float): Discount as a fraction (0.15 = 15% off).
 
 Returns:
-    tuple[numpy.ndarray, numpy.ndarray]: Per tier, revenue given
-    up on units that would sell anyway (negative) and revenue
-    gained on the extra units.
+    float: Required extra units as a fraction.
 """
 ```
 
-#### `bootstrap` — [src/q3_discounts.py:113](src/q3_discounts.py:113)
+#### `bootstrap` — [src/q3_discounts.py:90](src/q3_discounts.py:90)
 ```python
-"""Estimate tier lifts with an order-level bootstrap.
+"""Re-run the comparisons on resampled orders.
 
 Args:
-    d (pandas.DataFrame): Output of ``tier_data``.
-    spec (str): Specification name for ``design_matrix``.
-    with_revenue (bool): Also compute revenue components.
+    d (pandas.DataFrame): Order lines with ``OrderID``.
+    reps (int): Number of resamples.
+    seed (int): Random seed, so results repeat.
 
 Returns:
-    dict[str, numpy.ndarray]: ``point`` and ``boot`` coefficients;
-    with ``with_revenue``, also ``give_point``, ``gain_point``,
-    ``give_boot`` and ``gain_boot``.
+    pandas.DataFrame: 2.5th and 97.5th percentile of the overall,
+    same-product and same-customer lift.
 """
 ```
 
-#### `lift_table` — [src/q3_discounts.py:150](src/q3_discounts.py:150)
+#### `size_table` — [src/q3_discounts.py:115](src/q3_discounts.py:115)
 ```python
-"""Convert tier coefficients to percent lifts with intervals.
+"""Measure how often each size of customer gets a discount.
+
+Customers are split into four equal groups by total units bought.
 
 Args:
-    res (dict[str, numpy.ndarray]): Output of ``bootstrap``.
+    d (pandas.DataFrame): Order lines with ``CustomerID``,
+        ``Quantity``
+        and ``discounted``.
 
 Returns:
-    pandas.DataFrame: Per tier: lift, 95% interval bounds and
-    break-even lift, all in percent.
+    pandas.DataFrame: Customers, lines and discounted share
+    per group.
 """
 ```
 
-#### `raw_tier_summary` — [src/q3_discounts.py:171](src/q3_discounts.py:171)
+#### `plot_lift` — [src/q3_discounts.py:137](src/q3_discounts.py:137)
 ```python
-"""Summarize units per line by discount level.
+"""Plot extra units for three comparisons vs. break-even.
 
 Args:
-    d (pandas.DataFrame): Output of ``tier_data``.
+    estimates (dict[str, float]): Extra units as a fraction for
+        ``All lines``, ``Same product`` and ``Same customer``.
+    needed (float): Extra units a typical discount needs,
+        as a fraction.
 
 Returns:
-    pandas.DataFrame: Line count, mean and median units, and raw
-    lift versus no discount, by discount.
+    None. Saves ``q3_more_units_by_comparison.png``.
 """
 ```
 
-#### `revenue_effect_table` — [src/q3_discounts.py:186](src/q3_discounts.py:186)
+#### `plot_revenue` — [src/q3_discounts.py:165](src/q3_discounts.py:165)
 ```python
-"""Tabulate net revenue effect by tier, with a total row.
+"""Plot net revenue effect of discounts under three assumed lifts.
 
 Args:
-    res (dict[str, numpy.ndarray]): ``bootstrap`` output computed
-        with ``with_revenue=True``.
-
-Returns:
-    pandas.DataFrame: Revenue given up, gained, net and its 95%
-    interval for each tier and for ``All tiers``.
-"""
-```
-
-#### `selection_tables` — [src/q3_discounts.py:214](src/q3_discounts.py:214)
-```python
-"""Measure who receives discounts.
-
-The customer correlation uses customers with at least 10 lines.
-
-Args:
-    d (pandas.DataFrame): Output of ``tier_data``.
-
-Returns:
-    tuple: Discount share by customer-size quartile; by employee;
-    Spearman rho of customer units and discount share; chi-square
-    p-value across employees; Spearman rho of order value and mean
-    discount.
-"""
-```
-
-#### `point_range` — [src/q3_discounts.py:253](src/q3_discounts.py:253)
-```python
-"""Draw point estimates with vertical interval bars.
-
-Args:
-    ax (matplotlib.axes.Axes): Axes to draw on.
-    x (numpy.ndarray): Base x positions.
-    point (numpy.ndarray): Point estimates.
-    low (numpy.ndarray): Lower interval bounds.
-    high (numpy.ndarray): Upper interval bounds.
-    color (str): Marker and bar color.
-    label (str): Legend label.
-    offset (float): Horizontal shift applied to ``x``.
-
-Returns:
-    None. Adds the markers to ``ax``.
-"""
-```
-
-#### `plot_lift` — [src/q3_discounts.py:273](src/q3_discounts.py:273)
-```python
-"""Plot estimated unit lift by tier against break-even.
-
-Args:
-    tables (dict[str, pandas.DataFrame]): ``lift_table`` output
-        for ``product_fe`` and ``customer_fe``.
-
-Returns:
-    None. Saves ``q3_discount_lift_vs_break_even.png``.
-"""
-```
-
-#### `plot_revenue` — [src/q3_discounts.py:307](src/q3_discounts.py:307)
-```python
-"""Plot net revenue effect by tier under two lift estimates.
-
-Args:
-    rev_by_spec (dict[str, pandas.DataFrame]): Revenue effect
-        tables, without the total row, for ``product_fe`` and
-        ``customer_fe``.
+    effects (dict[str, float]): Net revenue effect in dollars per
+        scenario label.
 
 Returns:
     None. Saves ``q3_revenue_effect.png``.
 """
 ```
 
-#### `plot_selection` — [src/q3_discounts.py:341](src/q3_discounts.py:341)
+#### `plot_size` — [src/q3_discounts.py:192](src/q3_discounts.py:192)
 ```python
-"""Plot discount share by customer size and by employee.
+"""Plot how often each customer size group gets a discount.
 
 Args:
-    by_quartile (pandas.DataFrame): Discount share per customer
-        volume quartile.
-    by_emp (pandas.DataFrame): Discount share per employee.
-    overall (float): Share of all lines discounted, in 0 to 1.
+    by_size (pandas.DataFrame): Output of ``size_table``.
 
 Returns:
-    None. Saves ``q3_discount_selection.png``.
+    None. Saves ``q3_discount_by_customer_size.png``.
 """
 ```
 
-#### `main` — [src/q3_discounts.py:378](src/q3_discounts.py:378)
+#### `main` — [src/q3_discounts.py:214](src/q3_discounts.py:214)
 ```python
 """Run the Question 3 analysis, then save tables and figures.
 
@@ -672,14 +572,15 @@ Returns:
 """
 ```
 
+
 ## src/run_all.py
 
-#### module — [src/run_all.py:1](src/run_all.py:1)
+#### `module` — [src/run_all.py:1](src/run_all.py:1)
 ```python
 """Run the full pipeline: extraction, then every table and figure."""
 ```
 
-#### `main` — [src/run_all.py:12](src/run_all.py:12)
+#### `main` — [src/run_all.py:13](src/run_all.py:13)
 ```python
 """Run extraction and all three analyses, then copy the figures.
 
@@ -690,3 +591,18 @@ Returns:
     None. Stops with an error if any step fails.
 """
 ```
+
+
+46 docstrings in total.
+
+## Assumptions to check
+
+1. `lift_within` / `key`: groups are compared only when they have at least 3 discounted and 3 full-price lines (`MIN_LINES`), and each group's ratio is weighted by its number of discounted lines.
+2. `revenue_effect` / `lift`: assumed that without the discount a discounted line would have sold `1 / (1 + lift)` of its units at the full `UnitPrice`.
+3. `break_even_lift` / `depth`: called with the average discount depth on discounted lines, so the break-even is approximate.
+4. `driver_summary`: windows come from `common.WINDOW_A` and `WINDOW_B`, and revenue is constant-price (`CPRev`).
+5. `bootstrap`: resamples whole orders with replacement, 300 times, seed 0, and returns the 2.5th and 97.5th percentiles.
+
+## Also noticed
+
+- Nothing in the code was changed by the docstring pass.

@@ -1,5 +1,5 @@
-volume_quartile,customers,lines,discounted_share
-Q1 (smallest),23,187,0.0
-Q2,22,346,0.31213872832369943
-Q3,22,537,0.4227188081936685
-Q4 (largest),22,1060,0.46226415094339623
+size,customers,lines,discounted_share
+Smallest,23,187,0.0
+Small,22,346,0.31213872832369943
+Large,22,537,0.4227188081936685
+Largest,22,1085,0.46359447004608295
