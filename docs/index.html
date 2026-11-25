@@ -35,11 +35,11 @@
 <body>
 <main>
 <h1>Northwind: three questions about stock, growth and discounts</h1>
-<p class="lede">The Northwind database covers 830 orders (2,155 order lines) from July 1996 to early May 1998, with 91 customers, 77 products and 29 suppliers. I picked three questions where the data can support an answer, and I state where it cannot. Every number and chart here is produced by the Python code in the <a href="https://github.com/Cheltonio/Northwind-Database-Analysis-Code">GitHub repository</a>.</p>
+<p class="lede">The Northwind database covers 830 orders (2,155 order lines) from July 1996 to early May 1998, with 91 customers (89 of them placed an order), 77 products and 29 suppliers. I picked three questions the data can actually answer, and each section says where the data falls short. Every number and chart here is produced by the Python code in the <a href="https://github.com/Cheltonio/Northwind-Database-Analysis-Code">GitHub repository</a>.</p>
 
 <h3>Data notes that apply throughout</h3>
 <ul class="caveat">
-  <li><strong>Price increase.</strong> Prices rose a uniform 25% on 7 April 1997. To keep that from looking like growth, "constant-price revenue" values every line at the current list price: list price × quantity × (1 − discount).</li>
+  <li><strong>Price increase.</strong> Prices rose a uniform 25% on 7 April 1997. To keep that from looking like growth, "constant-price revenue" prices every line at the current list price, so a sale is worth the same in 1996 as in 1998 (list price × quantity × (1 − discount)).</li>
   <li><strong>Partial final month.</strong> Data ends on 6 May 1998, so May 1998 is excluded and all windows end in April 1998.</li>
   <li><strong>No cost data.</strong> Everything is revenue, not profit.</li>
 </ul>
@@ -53,7 +53,7 @@
   <p>A stock-out on a product that sells well costs revenue immediately, while a reorder level that ignores demand means the replenishment rule is not doing its job. Revenue is concentrated, so a few products carry most of the risk.</p>
 
   <h3>Approach</h3>
-  <p>Demand is each product's average monthly units over the last six full months (Nov 1997 to Apr 1998). Days of cover is units in stock divided by demand, scaled to days. I compare reorder levels to demand with a Spearman rank correlation, measure how revenue concentrates across products and suppliers, and repeat the cover calculation with 3-month and all-time demand windows to check the result does not depend on the window.</p>
+  <p>Demand is each product's average monthly units over the last six full months (Nov 1997 to Apr 1998). Days of cover is units in stock divided by demand, scaled to days. To see whether reorder levels follow demand, I check whether products that sell more also have higher reorder levels (a rank correlation, where 0 means no link and 1 means a perfect link). I also measure how much revenue comes from a few products and suppliers, and repeat the cover calculation with 3-month and all-time demand to confirm the answer does not depend on the time window.</p>
 
   <figure>
     <img src="figures/q1_reorder_vs_demand.png" alt="Scatter plot of reorder level against average monthly units sold; no visible relationship">
@@ -77,12 +77,12 @@
   </table></div>
 
   <h3>Main finding</h3>
-  <div class="finding"><p>Reorder levels are unrelated to demand (Spearman ρ = −0.01). 24 products have a reorder level of zero, and together they carry 41.8% of recent revenue. 13 of the 15 highest-revenue products have under 30 days of stock, and 80% of recent revenue sits in products with under 30 days of cover. Only one product is below its reorder level with nothing on order, so the problem is the rule, not missed execution of it.</p></div>
+  <div class="finding"><p>Reorder levels have essentially no link to demand (correlation −0.01, where 0 means none). 24 products have a reorder level of zero, and together they carry 41.8% of recent revenue. 13 of the 15 highest-revenue products have under 30 days of stock, and 80% of recent revenue sits in products with under 30 days of cover. Only one product is below its reorder level with nothing on order, so the problem is the reorder rule itself, not staff ignoring it.</p></div>
 
   <h3>Business implication</h3>
   <p>Reset reorder levels from demand (for example, a target number of days of cover with a supplier lead-time buffer), starting with the 11 products that make up half of revenue. Review the 8 discontinued products separately, since they still account for 13.7% of recent revenue.</p>
 
-  <p class="caveat"><strong>Limits.</strong> The stock figures are a single undated snapshot, so cover is measured against past demand, not a forecast. There is no lead-time data, so "under 30 days" is a screening threshold, not proof of a stock-out. 76 of the 77 products sold in the window. The count of products flagged as under 30 days among active products is 38, 36 and 34 under the 6-month, 3-month and all-time windows, and 30 are flagged in all three.</p>
+  <p class="caveat"><strong>Limits.</strong> The stock figures are a single undated snapshot, so cover is measured against past demand, not a forecast. There is no lead-time data, so "under 30 days" is a screening threshold, not proof of a stock-out. 76 of the 77 products sold in the window. Counting only active (not discontinued) products, 38, 36 and 34 are under 30 days of cover using 6-month, 3-month and all-time demand, and 30 are flagged under all three.</p>
 </section>
 
 <!-- ============ Q2 ============ -->
@@ -94,7 +94,7 @@
   <p>Each source of growth calls for a different plan: acquiring customers, getting existing customers to order more often, or growing order size. Knowing which markets are ahead of or behind the company average shows where sales effort is most likely to pay off.</p>
 
   <h3>Approach</h3>
-  <p>I compare two ten-month windows, Jul 1996 to Apr 1997 and Jul 1997 to Apr 1998, using constant-price revenue. Revenue is split exactly as customers × orders per customer × revenue per order, and the dollar change is attributed to each factor with a logarithmic-mean weighting. Markets are assigned by the customer's country. For each market I measure the "gap vs. company growth": its actual revenue in the later window minus what it would have earned had it grown at the company rate. A like-for-like check follows only the 42 customers who were already ordering in the earlier window.</p>
+  <p>I compare two ten-month windows, Jul 1996 to Apr 1997 and Jul 1997 to Apr 1998, using constant-price revenue. Revenue equals the number of customers × orders per customer × revenue per order, so I split the dollar change into those three pieces (using a standard weighting so the pieces add up exactly to the total). Markets are assigned by the customer's country. For each market I measure its "gap vs. company growth": its actual revenue in the later period minus what it would have earned if it had grown at the company-wide rate. As a check, I also follow only the 42 customers who were already ordering in the earlier period, so new customers cannot explain the result.</p>
 
   <figure>
     <img src="figures/q2_growth_drivers_by_market.png" alt="Bar chart decomposing revenue change by market into customers, orders per customer and order size">
@@ -137,7 +137,7 @@
   <p>Discounts cost revenue on every unit that would have sold anyway. They only pay off if they bring in enough extra units to cover it, and a discount of d% needs a lift of d/(1−d), for example 33% extra units for a 25% discount.</p>
 
   <h3>Approach</h3>
-  <p>38.9% of the 2,155 order lines carry a discount (5%, 10%, 15%, 20% or 25%), giving up $88.7K, or 6.5% of $1.35M gross revenue at listed prices. I regress log quantity on discount-tier indicators, always holding the product fixed, and then add customer fixed effects so the comparison is a customer against itself. Intervals come from an order-level bootstrap (1,000 resamples). Order 11077 has off-tier discounts and is left out of the tier models. This is an association: Northwind did not randomize discounts, and there is no cost data.</p>
+  <p>38.9% of the 2,155 order lines carry a discount (5%, 10%, 15%, 20% or 25%), giving up $88.7K, or 6.5% of $1.35M gross revenue at listed prices. To estimate how many extra units a discount brings, I use a regression that compares the quantity ordered at each discount level against no discount for the same product. I then add a second version that also compares each customer only against itself, because some customers may simply order more. The ranges shown (95% confidence intervals) come from re-running the analysis on 1,000 resampled sets of orders. Order 11077 has off-tier discounts and is left out of the tier models. This is an association: Northwind did not randomize discounts, and there is no cost data.</p>
 
   <figure>
     <img src="figures/q3_discount_lift_vs_break_even.png" alt="Estimated unit lift by discount tier with and without customer controls, against break-even lift">
@@ -162,8 +162,8 @@
   </table></div>
 
   <h3>Main finding</h3>
-  <div class="finding"><p>Discounted lines sell more units (27.5 vs. 21.9 on average, Kruskal-Wallis p ≈ 2×10⁻⁹), and within the same product the estimated lift is about 30% at every tier. Deeper discounts do not lift more: the 25% tier is not distinguishable from the 5% tier. But the lift largely vanishes when I compare a customer with itself, where every tier's interval includes zero. Larger customers are discounted more often (Spearman 0.40 between customer volume and discount share), so much of the raw lift reflects who gets discounts, not what the discount did.</p></div>
-  <p>Counting all of the across-customer lift as caused by discounts, discounts would net about +$52K (95% CI +$14K to +$96K), mostly from the 5% tier. Under the same-customer estimate the net is about −$71K (−$117K to −$29K), with the 10% to 25% tiers each losing money. Four of five tiers have a confidence interval that dips below their break-even lift even under the optimistic estimate.</p>
+  <div class="finding"><p>Discounted lines sell more units (27.5 vs. 21.9 on average, Kruskal-Wallis p ≈ 2×10⁻⁹), and when the same product is compared, discounted lines sell roughly 30% more units, at every tier. Deeper discounts do not lift more: the 25% tier is not distinguishable from the 5% tier. But the extra units largely disappear when each customer is compared only with itself: for every tier, the range of plausible values includes zero. Larger customers are discounted more often (Spearman 0.40 between customer volume and discount share), so much of the apparent lift reflects who receives discounts, not what the discount did.</p></div>
+  <p>Counting all of the across-customer lift as caused by discounts, discounts would net about +$52K (95% CI +$14K to +$96K), mostly from the 5% tier. Under the same-customer estimate the net is about −$71K (−$117K to −$29K), with the 10% to 25% tiers each losing money. Even under the optimistic estimate, for four of the five tiers the plausible range for the lift dips below what is needed to break even.</p>
 
   <h3>Business implication</h3>
   <p>The evidence does not support deep discounts as a volume driver: depth does not buy more units, and a 25% discount needs a 33% lift to break even. If discounts continue, shallow ones targeted at accounts where they can be tested are the defensible choice. Better still, run a controlled test (discount a random subset of comparable accounts) to separate customer effects from discount effects. Discount frequency also varies across employees (31.5% to 50.4% of lines), which suggests discounts are not following a consistent rule.</p>
@@ -172,7 +172,7 @@
 </section>
 
 <footer class="caveat">
-  <p>Source: Northwind database PDF, extracted to CSV by <code>src/extract_data.py</code>. Reproduce everything with <code>python src/run_all.py</code>; see the repository README.</p>
+  <p>Source: Northwind database PDF, extracted to CSV by <code>src/extract_data.py</code>. Reproduce everything with <code>python src/run_all.py</code>; instructions are in the repository README.</p>
 </footer>
 </main>
 </body>

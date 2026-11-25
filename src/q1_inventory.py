@@ -20,7 +20,7 @@ DAYS_PER_MONTH = 30.4
 
 
 def monthly_units(lines):
-    """Total units per product and month, to the last full month.
+    """Sum units per product and month, up to the last full month.
 
     Args:
         lines (pandas.DataFrame): Order lines from ``build_lines``.
@@ -163,7 +163,9 @@ def plot_cover(d):
     ax.set_xlabel("Days of cover at last-6-month demand (units in stock / units sold per day)")
     ax.set_xlim(0, 75)
     ax.set_title(f"{n_under} of the 15 biggest revenue products have under 30 days of stock")
-    ax.legend(handles=[Patch(color=BLUE, label="Active"), Patch(color=ORANGE, label="Discontinued")],
+    ax.legend(handles=[Patch(color=BLUE, label="Active"), Patch(color=ORANGE, label="Discontinued"),
+                       plt.Line2D([0], [0], marker="D", color="none", markerfacecolor=INK_2,
+                                  markeredgecolor=INK_2, markersize=6, label="Out of stock (0 units)")],
               loc="upper right", bbox_to_anchor=(1.0, 0.93))
     ax.grid(axis="y", visible=False)
     save_fig(fig, "q1_cover_top_products")

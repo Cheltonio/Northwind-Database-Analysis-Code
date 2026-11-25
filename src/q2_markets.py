@@ -220,9 +220,9 @@ def plot_drivers(grouped):
         pos_left += np.where(vals >= 0, vals, 0)
         neg_left += np.where(vals < 0, vals, 0)
     ax.scatter(order["usd_change"] / 1000, y, marker="D", s=46, color=INK, zorder=4)
-    for yi, v in zip(y, order["usd_change"] / 1000):
-        ax.annotate(f"{v:+.0f}K", (v, yi), xytext=(8 if v >= 0 else -8, 0), textcoords="offset points",
-                    va="center", ha="left" if v >= 0 else "right", fontsize=8.5, color=INK_2)
+    for yi, v, edge in zip(y, order["usd_change"] / 1000, pos_left):
+        ax.annotate(f"net {v:+.0f}K".replace("-", "\u2212"), (max(edge, v), yi), xytext=(10, 0),
+                    textcoords="offset points", va="center", ha="left", fontsize=8.5, color=INK_2)
     ax.axvline(0, color=INK_2, lw=0.8)
     ax.set_yticks(y)
     ax.set_yticklabels(labels)
@@ -231,7 +231,7 @@ def plot_drivers(grouped):
     handles = [Patch(color=colors[k], label=DRIVER_LABELS[k]) for k in DRIVERS]
     handles.append(plt.Line2D([0], [0], marker="D", color="none", markerfacecolor=INK,
                               markeredgecolor=INK, label="Net change", markersize=6))
-    ax.legend(handles=handles, loc="center right", bbox_to_anchor=(1.0, 0.45))
+    ax.legend(handles=handles, loc="upper center", bbox_to_anchor=(0.45, -0.13), ncol=2, frameon=False)
     ax.grid(axis="y", visible=False)
     save_fig(fig, "q2_growth_drivers_by_market")
 

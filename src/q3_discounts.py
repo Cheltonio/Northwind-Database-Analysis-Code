@@ -90,7 +90,8 @@ def revenue_components(price, qty, disc, lifts):
     caused by the discount.
 
     Args:
-        price (numpy.ndarray): List unit price per line.
+        price (numpy.ndarray): Pre-discount unit price charged per
+            line (``UnitPrice``, not ``ListPrice``).
         qty (numpy.ndarray): Units sold per line.
         disc (numpy.ndarray): Discount rate per line.
         lifts (numpy.ndarray): Fractional unit lift for each tier.
@@ -220,9 +221,12 @@ def selection_tables(d):
         d (pandas.DataFrame): Output of ``tier_data``.
 
     Returns:
-        tuple: Discount share by customer-size quartile; by employee;
-        Spearman rho of customer units and discount share; chi-square
-        p-value across employees; Spearman rho of order value and mean
+        tuple[pandas.DataFrame, pandas.DataFrame, float, float, float]:
+        Customers, lines and discounted share per customer-volume
+        quartile; lines, discounted share and mean depth when
+        discounted per employee; Spearman rho of customer units vs.
+        discounted share; chi-square p-value of discounting across
+        employees; Spearman rho of pre-discount order value vs. mean
         discount.
     """
     d = d.copy()
@@ -290,7 +294,7 @@ def plot_lift(tables):
     ax.scatter(x, be, marker="D", s=70, facecolor="none", edgecolor=INK, linewidth=1.4, zorder=4,
                label="Lift needed to break even on revenue")
     for xi, v in zip(x, be):
-        ax.annotate(f"{v:.0f}%", (xi, v), xytext=(-10, -2), textcoords="offset points", ha="right",
+        ax.annotate(f"{v:.0f}%", (xi, v), xytext=(0, 11), textcoords="offset points", ha="center",
                     fontsize=8.5, color=INK_2, va="center")
     ax.axhline(0, color=INK_2, lw=0.8)
     ax.set_xticks(x)
@@ -322,7 +326,7 @@ def plot_revenue(rev_by_spec):
         r = rev_by_spec[spec]
         point_range(ax, x, r["net_revenue_effect"].values / 1000, r["net_ci_low"].values / 1000,
                     r["net_ci_high"].values / 1000, SCENARIO_COLORS[spec],
-                    f"If the lift is the {SCENARIO_LABELS[spec].lower()} estimate", offset)
+                    f"Assuming the lift measured within: {SCENARIO_LABELS[spec].lower()}", offset)
         for xi, v in zip(x, r["net_revenue_effect"].values / 1000):
             ax.annotate(f"{v:+.0f}K", (xi + offset, v), xytext=(9 if offset > 0 else -9, 0),
                         textcoords="offset points", va="center",
